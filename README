@@ -1,5 +1,0 @@
-Constructing a Gene Regulatory Network from yeast DNA micro-array dataset
-
-1. The data sets are in mat file
-2. The matlab script can create text file data from the mat files
-3. The python script is used to analyse the text file data
