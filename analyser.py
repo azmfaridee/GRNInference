@@ -16,6 +16,7 @@ yeastnames_mat = loadmat('ystnames.mat')
 yeast_expressions = pd.DataFrame(yeast_mat['Yeast'])
 yeast_names = pd.DataFrame(yeastnames_mat['yystr'])
 
-df = pd.DataFrame(yeast_expressions.T, columns=yeast_names)
-# stddevs = pd.DataFrame(df.std())
-# pearsons_corr = df.corr()
+df = pd.DataFrame(yeast_mat['Yeast'].T, columns=yeastnames_mat['yystr'])
+
+sample = df.T.sample(100).T
+pearsons_corr = sample.corr()
