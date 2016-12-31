@@ -13,7 +13,9 @@ from scipy.io import loadmat
 
 yeast_mat = loadmat('yeast.mat')
 yeastnames_mat = loadmat('ystnames.mat')
-# yeast_expressions = pd.DataFrame(yeast_mat['Yeast'])
-# yeast_names = pd.DataFrame(yeastnames_mat['yystr'])
+yeast_expressions = pd.DataFrame(yeast_mat['Yeast'])
+yeast_names = pd.DataFrame(yeastnames_mat['yystr'])
 
-df = pd.DataFrame(yeast_mat['Yeast'].T, columns=yeastnames_mat['yystr'])
+df = pd.DataFrame(yeast_expressions.T, columns=yeast_names)
+# stddevs = pd.DataFrame(df.std())
+# pearsons_corr = df.corr()
