@@ -25,8 +25,11 @@ df_orig = pd.DataFrame(yeast_mat['Yeast'].T, columns=yeastnames_mat['yystr'])
 #             print('pair ({}, {}) has very high correlations'.format(p, q))
 # END zero order correlation analysis
 
+# initial parameters
 n_samples = 100
-partial_corr_threshold = 0.1
+zero = 0.001
+part_zero = 0.1
+
 tripplet_samples =  pd.DataFrame(columns=['a', 'b', 'c', 'r_ac_b'])
 for i in range(n_samples):
     tripplet = df_orig.sample(3, axis=1)
@@ -35,6 +38,10 @@ for i in range(n_samples):
     # calculate partial correlations
     r_ac_b = (r_ac * r_ab * r_bc) / math.sqrt((1 - math.pow(r_ab, 2)) * (1 - math.pow(r_bc, 2)))
     temp = pd.DataFrame([tripplet.keys().values], columns=['a', 'b', 'c'])
+    temp['r_ac'] = [[r_ac]]
     temp['r_ac_b'] = [[r_ac_b]]
+    temp['no_effect'] = 1 if abs(r_ac - r_ac_b) > zero else 0
+    temp['full_expl'] = 1 if abs(r_ac_b) < zero else 0
+    temp['part_expl'] = 1 if abs(r_ac_b) < part_zero and abs(r_ac_b) > zero else 0
     tripplet_samples = tripplet_samples.append(temp)
-    
+
