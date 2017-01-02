@@ -12,7 +12,7 @@ df_orig = pd.DataFrame(yeast_mat['Yeast'].T, columns=yeastnames_mat['yystr'])
 
 # set df as a small sample of the main dataset 
 # df = df_orig
-df = df_orig.sample(20, axis=1)
+df = df_orig.sample(16, axis=1)
 
 # START zero order correlation analysis
 # pearsons_corr = df.corr()
@@ -51,6 +51,7 @@ df = df_orig.sample(20, axis=1)
 # create initial grn
 grn = pd.DataFrame(np.zeros(shape=(len(df.keys()), len(df.keys()))), index=df.keys(), columns=df.keys())
 keys = grn.keys()
+# each row denotes a child node and each column denotes a parent node
 for i in range(len(keys)):
     p = keys[i]
     n_parents = np.random.randint(2, 8)
@@ -61,5 +62,5 @@ for i in range(len(keys)):
     remaining_parents = min(n_parents, len(candidates))
     if remaining_parents > 0:
         for q in candidates.sample(remaining_parents):
-            grn[p][q] = grn[q][p] = 1
+            grn[q][p] = 1
 
