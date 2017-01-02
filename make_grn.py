@@ -49,6 +49,7 @@ df = df_orig.sample(16, axis=1)
 # END partial correlaiton analysis
 
 # create initial grn
+# TODO: use sparse data type later instead of the normal data type
 grn = pd.DataFrame(np.zeros(shape=(len(df.keys()), len(df.keys()))), index=df.keys(), columns=df.keys())
 keys = grn.keys()
 # each row denotes a child node and each column denotes a parent node
@@ -64,3 +65,4 @@ for i in range(len(keys)):
         for q in candidates.sample(remaining_parents):
             grn[q][p] = 1
 
+grn_sparse = grn.to_sparse()
