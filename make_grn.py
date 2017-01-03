@@ -64,5 +64,4 @@ for i in range(len(keys)):
     if remaining_parents > 0:
         for q in candidates.sample(remaining_parents):
             grn[q][p] = 1
-
 grn_sparse = grn.to_sparse()
