@@ -52,4 +52,4 @@ for i in range(n_genes): #[0]:
         grn[target_gene][input_genes[i]] = x
 # END FOR
 
-
+grn.to_csv('yeast_grn.csv')
